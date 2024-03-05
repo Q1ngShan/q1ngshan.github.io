@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Q1ngShan">
+    
+    <title>
+        
+            PHP代码审计入门篇二 ——MVC结构审计 |
+        
+        Q1ngShan&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Q1ngShan's Blog","author":"Q1ngShan","avatar":"/images/avatar.svg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"Archives":"/archives","Tags":"/tags","Categories":"/categories","Links":"/links","About":"/about"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"category":false,"tag":true,"announcement":null},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":"uYjIFMUudNVXopwyoQdj70qU","appkey":"9FcDBafKpBdj0IEnf4IQqEQ5","server_urls":"https://uyjifmuu.api.lncldglobal.com","placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"jsdelivr"},"pjax":{"enable":true},"footer":{"since":2020,"word_count":false,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":true,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Q1ngShan&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class=""
+                           href="/"
+                        >HOME</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >ARCHIVES</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >TAGS</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >CATEGORIES</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >LINKS</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >ABOUT</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class=""
+                   href="/"
+                >HOME</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links"
+                    >LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about"
+                    >ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        PHP代码审计入门篇二 ——MVC结构审计
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.svg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Q1ngShan</span>
+                                
+                                    <span class="author-badge">Lv2</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2019-05-16 13:37:12</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Tue Mar 05 2024 09:46:16 GMT+0000">2024-03-05 09:46:16</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/PHP/">PHP</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.2k Words</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>9 Mins</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <h2 id="0x0-MVC简介"><a href="#0x0-MVC简介" class="headerlink" title="0x0 MVC简介"></a>0x0 MVC简介</h2><p>在审计代码之前我们先来了解下 什么是MVC。</p>
+<p>MVC模式代表 Model-View-Controller(模型-视图-控制器) 模式。这种模式用于应用程序的分层开发。</p>
+<ul>
+<li><strong>模型Model</strong> – 管理<strong>大部分的业务逻辑</strong>和<strong>所有的数据库逻辑</strong>。模型提供了连接和操作数据库的抽象层。</li>
+<li><strong>控制器Controller</strong> - 负责响应用户请求、准备数据，以及决定如何展示数据。</li>
+<li><strong>视图View</strong> – 负责<strong>渲染数据</strong>，通过HTML方式呈现给用户。</li>
+</ul>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://i.loli.net/2019/05/14/5cda778ee82f867877.png"
+                       
+                 ></p>
+<p>mvc的运行流程：</p>
+<ol>
+<li>controller获取用户的请求</li>
+<li>controller根据获取的请求调用相应的Model完成状态的读写操作</li>
+<li>controller将Model处理的数据传递给View</li>
+<li>View将数据渲染将结果呈现给用户</li>
+</ol>
+<h2 id="0x1-了解目录结构"><a href="#0x1-了解目录结构" class="headerlink" title="0x1 了解目录结构"></a>0x1 了解目录结构</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">-- YxtCMF_v6.1</span><br><span class="line">	-- admin  后台静态文件</span><br><span class="line">    -- application	应用目录</span><br><span class="line">    -- data			数据配置文件</span><br><span class="line">    -- Expand		静态储存扩展</span><br><span class="line">    -- plugins		插件</span><br><span class="line">    -- public		资源文件目录</span><br><span class="line">    -- themes		主题</span><br><span class="line">    -- ueditor		编辑器</span><br><span class="line">    -- update		升级目录</span><br><span class="line">    -- Uploads		上传目录</span><br><span class="line">    -- yxtedu		核心目录根据Thinkphp3.2.3开发的</span><br></pre></td></tr></table></figure>
+
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://i.loli.net/2019/05/14/5cda7bdeb016985019.png"
+                       
+                 ></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">├─ThinkPHP 框架系统目录（可以部署在非web目录下面）</span><br><span class="line">│  ├─Common       核心公共函数目录</span><br><span class="line">│  ├─Conf         核心配置目录 </span><br><span class="line">│  ├─Lang         核心语言包目录</span><br><span class="line">│  ├─Library      框架类库目录</span><br><span class="line">│  │  ├─Think     核心Think类库包目录</span><br><span class="line">│  │  ├─Behavior  行为类库目录</span><br><span class="line">│  │  ├─Org       Org类库包目录</span><br><span class="line">│  │  ├─Vendor    第三方类库目录</span><br><span class="line">│  │  ├─ ...      更多类库目录</span><br><span class="line">│  ├─Mode         框架应用模式目录</span><br><span class="line">│  ├─Tpl          系统模板目录</span><br><span class="line">│  ├─LICENSE.txt  框架授权协议文件</span><br><span class="line">│  ├─logo.png     框架LOGO文件</span><br><span class="line">│  ├─README.txt   框架README文件</span><br><span class="line">│  └─ThinkPHP.php 框架入口文件</span><br></pre></td></tr></table></figure>
+
+<p>mvc架构的cms通常会有URL路由</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://i.loli.net/2019/05/14/5cda7d21ec51235190.png"
+                       
+                 ></p>
+<p> 例如我们访问<code>http://serverName/index.php/login</code></p>
+<p>等同于访问<code>http://serverName/index.php/user/login/index</code></p>
+<p>对应的controller类是：<code>application\User\Controller\IndexController.class.php</code></p>
+<p>了解相应的路由规则可以有效的定位漏洞的触发点</p>
+<h2 id="0x2-入口文件"><a href="#0x2-入口文件" class="headerlink" title="0x2 入口文件"></a>0x2 入口文件</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="title function_ invoke__">ini_get</span>(<span class="string">&#x27;magic_quotes_gpc&#x27;</span>))</span><br><span class="line">&#123;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">stripslashesRecursive</span>(<span class="params"><span class="keyword">array</span> <span class="variable">$array</span></span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">foreach</span> (<span class="variable">$array</span> <span class="keyword">as</span> <span class="variable">$k</span> =&gt; <span class="variable">$v</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (<span class="title function_ invoke__">is_string</span>(<span class="variable">$v</span>))</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="variable">$array</span>[<span class="variable">$k</span>] = <span class="title function_ invoke__">stripslashes</span>(<span class="variable">$v</span>);</span><br><span class="line">			&#125; <span class="keyword">else</span></span><br><span class="line">			<span class="keyword">if</span> (<span class="title function_ invoke__">is_array</span>(<span class="variable">$v</span>))</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="variable">$array</span>[<span class="variable">$k</span>] = <span class="title function_ invoke__">stripslashesRecursive</span>(<span class="variable">$v</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="variable">$array</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$_GET</span> = <span class="title function_ invoke__">stripslashesRecursive</span>(<span class="variable">$_GET</span>);</span><br><span class="line">	<span class="variable">$_POST</span> = <span class="title function_ invoke__">stripslashesRecursive</span>(<span class="variable">$_POST</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&quot;APP_DEBUG&quot;</span>,<span class="literal">false</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;SITE_PATH&#x27;</span>, <span class="title function_ invoke__">dirname</span>(__file__) . <span class="string">&quot;/&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;APP_PATH&#x27;</span>, SITE_PATH . <span class="string">&#x27;application/&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;SPAPP_PATH&#x27;</span>, SITE_PATH . <span class="string">&#x27;yxtedu/&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;SPAPP&#x27;</span>, <span class="string">&#x27;./application/&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&#x27;SPSTATIC&#x27;</span>, SITE_PATH . <span class="string">&#x27;statics/&#x27;</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&quot;RUNTIME_PATH&quot;</span>, SITE_PATH . <span class="string">&quot;data/runtime/&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&quot;HTML_PATH&quot;</span>, SITE_PATH . <span class="string">&quot;data/runtime/Html/&quot;</span>);</span><br><span class="line"><span class="title function_ invoke__">define</span>(<span class="string">&quot;THINKCMF_CORE_TAGLIBS&quot;</span>, <span class="string">&#x27;cx,Common\Lib\Taglib\TagLibSpadmin,Common\Lib\Taglib\TagLibHome&#x27;</span>);</span><br><span class="line"><span class="keyword">if</span> (!<span class="title function_ invoke__">file_exists</span>(<span class="string">&quot;data/install.lock&quot;</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">strtolower</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;g&#x27;</span>]) != <span class="string">&quot;install&quot;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="title function_ invoke__">header</span>(<span class="string">&quot;Location:./index.php?g=install&quot;</span>);</span><br><span class="line">        <span class="keyword">exit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">require</span> SPAPP_PATH . <span class="string">&#x27;Core/ThinkPHP.php&#x27;</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>line 2-21</code>判断了是否开启了<code>magic_quotes_gpc</code> ,如果开启了则会对<code>GET、POST</code>获得的数据进行处理。处理使用的函数就是<code>stripslashes</code>返回一个去除转义反斜线后的字符串（<code>\&#39;</code> 转换为 <code>&#39;</code> 等等）。双反斜线（<code>\\</code>）被转换为单个反斜线（<code>\</code>）。</p>
+<p>此处感觉多此一举，如果是开启了<code>magic_quotes_gpc</code>,程序直接使用了</p>
+<p><code>$_GET、$_POST</code>传输的数据则会存在安全问题。</p>
+<p>下面的流程就是引入<code>ThinkPHP</code>的核心文件和判断是否已经安装</p>
+<h2 id="0x3-审计"><a href="#0x3-审计" class="headerlink" title="0x3 审计"></a>0x3 审计</h2><p>因为此程序采用的mvc模式 所以 审计我们只要把重点放在controller这里即可</p>
+<p>有些读者可能不知该如何寻找出漏洞，在拿到源码后感觉无从下手。</p>
+<p>笔者在这里分享下自己的几个方法以供参考</p>
+<ul>
+<li>使用Seay源码审计根据特征扫描出来的位置进行跟进审计</li>
+<li>通读整个源码的流程层层跟进审计（这种需要耗费大量时间，但时间与收益是对等的，遗漏的东西不多）</li>
+<li>黑盒+白盒共同测试，根据前台或后台页面位置的功能，有选择的审计某个功能所对应的源码。例如：sql注入一般是需要有输入的地方，那么可以找登录模块、搜索模块、文章模块等等</li>
+</ul>
+<p>选择合适的方法可以为你接下来进行的工作提高效率。</p>
+<h3 id="0x3-1-前台登录一处注入"><a href="#0x3-1-前台登录一处注入" class="headerlink" title="0x3.1 前台登录一处注入"></a>0x3.1 前台登录一处注入</h3><p><code>application\User\Controller\LoginController.class.php</code></p>
+<p>LIne <code>116-140</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//登录验证</span></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">dologin</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   	<span class="keyword">if</span>(!<span class="title function_ invoke__">sp_check_verify_code</span>())&#123;</span><br><span class="line">   		<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">error</span>(<span class="string">&quot;验证码错误！&quot;</span>);</span><br><span class="line">   	&#125;</span><br><span class="line">   	<span class="variable">$users_model</span>=<span class="title function_ invoke__">M</span>(<span class="string">&quot;Users&quot;</span>);</span><br><span class="line">   	<span class="variable">$rules</span> = <span class="keyword">array</span>(</span><br><span class="line">   			<span class="comment">//array(验证字段,验证规则,错误提示,验证条件,附加规则,验证时间)</span></span><br><span class="line">   			<span class="keyword">array</span>(<span class="string">&#x27;username&#x27;</span>, <span class="string">&#x27;require&#x27;</span>, <span class="string">&#x27;手机号/邮箱/用户名不能为空！&#x27;</span>, <span class="number">1</span> ),</span><br><span class="line">   			<span class="keyword">array</span>(<span class="string">&#x27;password&#x27;</span>,<span class="string">&#x27;require&#x27;</span>,<span class="string">&#x27;密码不能为空！&#x27;</span>,<span class="number">1</span>),</span><br><span class="line">   	</span><br><span class="line">   	);</span><br><span class="line">   	<span class="keyword">if</span>(<span class="variable">$users_model</span>-&gt;<span class="title function_ invoke__">validate</span>(<span class="variable">$rules</span>)-&gt;<span class="title function_ invoke__">create</span>()===<span class="literal">false</span>)&#123;</span><br><span class="line">   		<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">error</span>(<span class="variable">$users_model</span>-&gt;<span class="title function_ invoke__">getError</span>());</span><br><span class="line">   	&#125;</span><br><span class="line">   	</span><br><span class="line">   	<span class="variable">$username</span>=<span class="variable">$_POST</span>[<span class="string">&#x27;username&#x27;</span>];</span><br><span class="line">   	</span><br><span class="line">   	<span class="keyword">if</span>(<span class="title function_ invoke__">preg_match</span>(<span class="string">&#x27;/^\d+$/&#x27;</span>, <span class="variable">$username</span>))&#123;<span class="comment">//手机号登录</span></span><br><span class="line">   	    <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">_do_mobile_login</span>();</span><br><span class="line">   	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">   	    <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">_do_email_login</span>(); <span class="comment">// 用户名或者邮箱登录</span></span><br><span class="line">   	&#125;</span><br><span class="line">   	 </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ol>
+<li>首先验证了验证码是否正确（默认是没有开验证码功能的）</li>
+<li>验证输入的内容是否满足 <code>$rules</code>的条件</li>
+<li> 132行直接接收了 $_POST传入的<code>username</code></li>
+<li>判断是以那种方式，手机号或者用户名登录的</li>
+</ol>
+<p>问题出在了</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://i.loli.net/2019/05/15/5cdc25cd3d56936762.jpg"
+                       
+                 ></p>
+<p>因为是直接接受的Post传过来的内容，在<code>Thinkphp 3.2.3</code>where处存在缺陷如果没有经过<code>I</code>函数接受数据则会导致SQL注入</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://i.loli.net/2019/05/15/5cdc25fb2e1e231781.jpg"
+                       
+                 ></p>
+<p>这个缺陷因为执行流程篇幅过长，分析会在后面的文章进行详细分析。</p>
+<p><code>_do_mobile_login</code>这里也存在，两个一样的类型。</p>
+<h3 id="0x3-2-后台广告编辑一处注入"><a href="#0x3-2-后台广告编辑一处注入" class="headerlink" title="0x3.2 后台广告编辑一处注入"></a>0x3.2 后台广告编辑一处注入</h3><p><code>application\Admin\Controller\AdController.class.php</code></p>
+<p>Line <code>37-42</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">edit</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="variable">$id</span>=<span class="title function_ invoke__">I</span>(<span class="string">&quot;get.id&quot;</span>);</span><br><span class="line">		<span class="variable">$ad</span>=<span class="variable language_">$this</span>-&gt;ad_model-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&quot;ad_id=<span class="subst">$id</span>&quot;</span>)-&gt;<span class="title function_ invoke__">find</span>();</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">assign</span>(<span class="variable">$ad</span>);</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">display</span>();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+
+<p>在<code>where</code>出直接拼接了参数，I函数默认使用的是<code>htmlspecialchars</code></p>
+<p>并不会转义单引号所以这里存在了注入</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://i.loli.net/2019/05/15/5cdc29610f71760461.jpg"
+                       
+                 ></p>
+<h3 id="0x3-3-后台友情连接处注入"><a href="#0x3-3-后台友情连接处注入" class="headerlink" title="0x3.3 后台友情连接处注入"></a>0x3.3 后台友情连接处注入</h3><p><code>application\Admin\Controller\LinkController.class.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一处注入</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">edit</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="variable">$id</span>=<span class="title function_ invoke__">I</span>(<span class="string">&quot;get.id&quot;</span>);<span class="comment">//下方使用了拼接字符</span></span><br><span class="line">		<span class="variable">$link</span>=<span class="variable language_">$this</span>-&gt;link_model-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&quot;link_id=<span class="subst">$id</span>&quot;</span>)-&gt;<span class="title function_ invoke__">find</span>();</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">assign</span>(<span class="variable">$link</span>);</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">assign</span>(<span class="string">&quot;targets&quot;</span>,<span class="variable">$this</span>-&gt;targets);</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">display</span>();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toggle</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;ids&#x27;</span>]) &amp;&amp; <span class="variable">$_GET</span>[<span class="string">&quot;display&quot;</span>])&#123;</span><br><span class="line">			<span class="variable">$ids</span> = <span class="title function_ invoke__">implode</span>(<span class="string">&quot;,&quot;</span>, <span class="variable">$_POST</span>[<span class="string">&#x27;ids&#x27;</span>]);</span><br><span class="line">			<span class="variable">$data</span>[<span class="string">&#x27;link_status&#x27;</span>]=<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">if</span> (<span class="variable language_">$this</span>-&gt;link_model-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&quot;link_id in (<span class="subst">$ids</span>)&quot;</span>)-&gt;<span class="title function_ invoke__">save</span>(<span class="variable">$data</span>)!==<span class="literal">false</span>) &#123;</span><br><span class="line">				<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">success</span>(<span class="string">&quot;显示成功！&quot;</span>);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">error</span>(<span class="string">&quot;显示失败！&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;ids&#x27;</span>]) &amp;&amp; <span class="variable">$_GET</span>[<span class="string">&quot;hide&quot;</span>])&#123;</span><br><span class="line">			<span class="variable">$ids</span> = <span class="title function_ invoke__">implode</span>(<span class="string">&quot;,&quot;</span>, <span class="variable">$_POST</span>[<span class="string">&#x27;ids&#x27;</span>]);</span><br><span class="line">			<span class="variable">$data</span>[<span class="string">&#x27;link_status&#x27;</span>]=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">if</span> (<span class="variable language_">$this</span>-&gt;link_model-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&quot;link_id in (<span class="subst">$ids</span>)&quot;</span>)-&gt;<span class="title function_ invoke__">save</span>(<span class="variable">$data</span>)!==<span class="literal">false</span>) &#123;</span><br><span class="line">				<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">success</span>(<span class="string">&quot;隐藏成功！&quot;</span>);</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">error</span>(<span class="string">&quot;隐藏失败！&quot;</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这几处注入都是因为自己拼接了字符串 或者使用原生的<code>POST、GET</code>获得数据没有任何过滤引起的注入</p>
+<p>这种注入在此程序中有多处就不再一一列举</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://i.loli.net/2019/05/16/5cdce4189f1cf33249.png"
+                       
+                 ></p>
+<h3 id="0x3-4-Getshell"><a href="#0x3-4-Getshell" class="headerlink" title="0x3.4 Getshell"></a>0x3.4 Getshell</h3><p>没有getshell的审计，怎么能满足各位呢:)</p>
+<p><code>application\Admin\Controller\RouteController.class.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="variable">$routes</span>=<span class="variable language_">$this</span>-&gt;route_model-&gt;<span class="title function_ invoke__">order</span>(<span class="string">&quot;listorder asc&quot;</span>)-&gt;<span class="title function_ invoke__">select</span>();</span><br><span class="line">		<span class="title function_ invoke__">sp_get_routes</span>(<span class="literal">true</span>);</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">assign</span>(<span class="string">&quot;routes&quot;</span>,<span class="variable">$routes</span>);</span><br><span class="line">		<span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">display</span>();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先获取了数据库中route表内容的数据，跟进<code>sp_get_routes</code></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://i.loli.net/2019/05/16/5cdcf0e991dc278694.png"
+                       
+                 ></p>
+<p>先从数据库中取出<code>status</code>为1的路由规则，然后对取出来的路由数组进行<code>htmlspecialchars_decode</code>解码</p>
+<p>在Line <code>1225-1227</code>处</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">F</span>(<span class="string">&quot;routes&quot;</span>,<span class="variable">$cache_routes</span>);</span><br><span class="line">	<span class="variable">$route_dir</span>=SITE_PATH.<span class="string">&quot;/data/conf/&quot;</span>;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="title function_ invoke__">file_exists</span>(<span class="variable">$route_dir</span>))&#123;</span><br><span class="line">		<span class="title function_ invoke__">mkdir</span>(<span class="variable">$route_dir</span>);</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="variable">$route_file</span>=<span class="variable">$route_dir</span>.<span class="string">&quot;route.php&quot;</span>;</span><br><span class="line">		</span><br><span class="line">	<span class="title function_ invoke__">file_put_contents</span>(<span class="variable">$route_file</span>, <span class="string">&quot;&lt;?php\treturn &quot;</span> . <span class="title function_ invoke__">stripslashes</span>(<span class="title function_ invoke__">var_export</span>(<span class="variable">$all_routes</span>, <span class="literal">true</span>)) . <span class="string">&quot;;&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>这里判断了<code>/data/conf/</code>文件夹是否存在不存在会创建，接着往下看可以看到使用<code>file_put_contents</code>函数进行了文件操作。将从数据表获取的数据以键值的形式存进<code>route.php</code>。这里要注意的是<code>stripslashes</code></p>
+<p>，如果没有这个函数的存在，数据中的<code>&#39;</code>会被<code>var_export</code>全部转义。</p>
+<p>因为多了一个<code>stripslashes</code>去除转义符，那么getshell的思路就有了:</p>
+<ol>
+<li><p>首先在后台添加路由到数据库内，不必担心添加数据时是否会被过滤.</p>
+</li>
+<li><p>添加后转到路由规则设置的首页</p>
+</li>
+<li><p>首页执行index()将数据库里的内容写入route.php</p>
+</li>
+</ol>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://i.loli.net/2019/05/16/5cdcf439835ba37827.png"
+                       
+                 ></p>
+<p>保存后访问<code>route.php</code>看看是否成功</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://i.loli.net/2019/05/16/5cdcf495c648d29591.png"
+                       
+                 ></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://i.loli.net/2019/05/16/5cdcf4f493b4362562.png"
+                       
+                 ></p>
+<p>成功getshell</p>
+<h2 id="0x4-篇外"><a href="#0x4-篇外" class="headerlink" title="0x4 篇外"></a>0x4 篇外</h2><p>代码审计需要有足够的耐心和细心，此处的getshell处，笔者也是找了很久才发现。</p>
+<p>多多阅读各位前辈公开的代码审计案例，以及乌云1000php，可以学习到一些不错的思路。</p>
+<p>笔者已经搭建了乌云1000php，在这里贴上地址：<a class="link"   target="_blank" rel="noopener" href="http://php.evi1s.com/" >http://php.evi1s.com/<i class="fas fa-external-link-alt"></i></a></p>
+<p>当然此程序还有其他的漏洞，例如变量覆盖，xss等这里笔者就留给各位学习代码审计的道友去自行审计学习了</p>
+<p>如果内容有错误处，请联系笔者，避免带偏其他人。</p>
+
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                PHP代码审计入门篇二 ——MVC结构审计
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2019/05/16/PHP代码审计入门篇二-——MVC结构审计/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    Author
+                </div>
+                <div class="content">Q1ngShan</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    Published
+                </div>
+                <div class="content">2019-05-16 13:37</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    License
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed">
+                        <i class="fa-brands fa-creative-commons"></i>
+                        <i class="fa-brands fa-creative-commons-by"></i>
+                        <i class="fa-brands fa-creative-commons-nc"></i>
+                        <i class="fa-brands fa-creative-commons-sa"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="Copy copyright info" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/PHP/">PHP</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="Share to WeChat"
+            data-tooltip-img-tip="Scan by WeChat"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to WeiBo"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2019/07/30/seacmsv9-92-%E5%89%8D%E5%8F%B0Getshell/"
+                                   title="seacmsv9.92 前台Getshell"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">seacmsv9.92 前台Getshell</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2019/03/25/%E6%9F%90CTF%E4%BA%A4%E6%B5%81%E7%BE%A4%E5%85%A5%E7%BE%A4WEB%E9%A2%98/"
+                                   title="某CTF交流群入群WEB题"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">某CTF交流群入群WEB题</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;Comments
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">Comment plugin failed to load</span>
+    <button class="reload keep-button">Click to reload</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">Loading comment plugin</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="valine-container">
+        <div id="vcomments"></div>
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script data-pjax
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initValine = () => {
+            const config = {
+              el: '#vcomments',
+              appId: 'uYjIFMUudNVXopwyoQdj70qU',
+              appKey: '9FcDBafKpBdj0IEnf4IQqEQ5',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '',
+              lang: 'en'.toLowerCase()
+            }
+
+            if ('https://uyjifmuu.api.lncldglobal.com') {
+              config.serverURLs = 'https://uyjifmuu.api.lncldglobal.com'
+            }
+
+            if (window?.Valine) {
+              new Valine(config)
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initValine()
+              }, 1000)
+            }
+          }
+
+          if ('true' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initValine()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initValine)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0-MVC%E7%AE%80%E4%BB%8B"><span class="nav-text">0x0 MVC简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x1-%E4%BA%86%E8%A7%A3%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-text">0x1 了解目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x2-%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6"><span class="nav-text">0x2 入口文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x3-%E5%AE%A1%E8%AE%A1"><span class="nav-text">0x3 审计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x3-1-%E5%89%8D%E5%8F%B0%E7%99%BB%E5%BD%95%E4%B8%80%E5%A4%84%E6%B3%A8%E5%85%A5"><span class="nav-text">0x3.1 前台登录一处注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x3-2-%E5%90%8E%E5%8F%B0%E5%B9%BF%E5%91%8A%E7%BC%96%E8%BE%91%E4%B8%80%E5%A4%84%E6%B3%A8%E5%85%A5"><span class="nav-text">0x3.2 后台广告编辑一处注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x3-3-%E5%90%8E%E5%8F%B0%E5%8F%8B%E6%83%85%E8%BF%9E%E6%8E%A5%E5%A4%84%E6%B3%A8%E5%85%A5"><span class="nav-text">0x3.3 后台友情连接处注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x3-4-Getshell"><span class="nav-text">0x3.4 Getshell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x4-%E7%AF%87%E5%A4%96"><span class="nav-text">0x4 篇外</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Q1ngShan</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+                
+                <div class="deploy-info info-item default">
+                    
+                        This site is deployed on <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/deploy-provider/github.png"></span>
+                    
+                </div>
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x0-MVC%E7%AE%80%E4%BB%8B"><span class="nav-text">0x0 MVC简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x1-%E4%BA%86%E8%A7%A3%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-text">0x1 了解目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x2-%E5%85%A5%E5%8F%A3%E6%96%87%E4%BB%B6"><span class="nav-text">0x2 入口文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x3-%E5%AE%A1%E8%AE%A1"><span class="nav-text">0x3 审计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x3-1-%E5%89%8D%E5%8F%B0%E7%99%BB%E5%BD%95%E4%B8%80%E5%A4%84%E6%B3%A8%E5%85%A5"><span class="nav-text">0x3.1 前台登录一处注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x3-2-%E5%90%8E%E5%8F%B0%E5%B9%BF%E5%91%8A%E7%BC%96%E8%BE%91%E4%B8%80%E5%A4%84%E6%B3%A8%E5%85%A5"><span class="nav-text">0x3.2 后台广告编辑一处注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x3-3-%E5%90%8E%E5%8F%B0%E5%8F%8B%E6%83%85%E8%BF%9E%E6%8E%A5%E5%A4%84%E6%B3%A8%E5%85%A5"><span class="nav-text">0x3.3 后台友情连接处注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x3-4-Getshell"><span class="nav-text">0x3.4 Getshell</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x4-%E7%AF%87%E5%A4%96"><span class="nav-text">0x4 篇外</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/toggle-theme.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/code-block.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/libs/anime.min.js"></script>
+
+<!-- local-search -->
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/local-search.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/lazyload.js"></script>
+
+
+<div class="pjax">
+    
+        <!-- post-helper -->
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/post-helper.js"></script>
+
+        <!-- toc -->
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/toc.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/copyright-info.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/share.js"></script>
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

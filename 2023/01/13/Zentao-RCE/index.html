@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Q1ngShan">
+    
+    <title>
+        
+            Zentao RCE |
+        
+        Q1ngShan&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/regular.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/solid.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Q1ngShan's Blog","author":"Q1ngShan","avatar":"/images/avatar.svg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"Archives":"/archives","Tags":"/tags","Categories":"/categories","Links":"/links","About":"/about"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"category":false,"tag":true,"announcement":null},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"obsidian"},"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":"uYjIFMUudNVXopwyoQdj70qU","appkey":"9FcDBafKpBdj0IEnf4IQqEQ5","server_urls":"https://uyjifmuu.api.lncldglobal.com","placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"jsdelivr"},"pjax":{"enable":true},"footer":{"since":2020,"word_count":false,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":true,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Q1ngShan&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class=""
+                           href="/"
+                        >HOME</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >ARCHIVES</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >TAGS</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >CATEGORIES</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >LINKS</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >ABOUT</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class=""
+                   href="/"
+                >HOME</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >ARCHIVES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >TAGS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >CATEGORIES</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links"
+                    >LINKS</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about"
+                    >ABOUT</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        Zentao RCE
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.svg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Q1ngShan</span>
+                                
+                                    <span class="author-badge">Lv2</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2023-01-13 18:02:24</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Tue Mar 05 2024 09:46:16 GMT+0000">2024-03-05 09:46:16</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>671 Words</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>2 Mins</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <p>下载补丁后可以看到只有两个module发生了改变<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673516850229016736037008539.jpg"
+                       
+                 ></p>
+<h2 id="权限绕过"><a href="#权限绕过" class="headerlink" title="权限绕过"></a>权限绕过</h2><p>和18beta1比对后发现<code>common/mode.php</code>有一处改动<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673517250207716736037008556.jpg"
+                       
+                 ></p>
+<p>由<code>echo</code>=&gt;<code>die</code>，看其所在函数名为<code>checkPriv</code>，推测其为权限绕过的补丁</p>
+<p>在<code>index.php</code>中调用了其函数，没修复前的<code>echo</code>则对执行流程没有影响，会继续向下执行。<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673517507133216736037008584.jpg"
+                       
+                 ></p>
+<p>再来看下<code>checkPriv</code>函数有哪些操作，<br>大概流程就是获取调用模块的名字和方法，定义了一些不需要权限的白名单调用方法<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673518235374516736037008606.jpg"
+                       
+                 ></p>
+<p>如果存在<code>$this-&gt;app-&gt;user</code>变量则将<code>session</code>中的<code>user</code>赋值给<code>$this-&gt;app-&gt;user</code><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673518356867316736037008615.jpg"
+                       
+                 ><br>检查用户如果没有调用功能的权限则进入到<code>deny</code>函数，最后抛出异常，而在<code>catch</code>里仅仅是输出了异常并没有终止流程。<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673579314899816736037008627.jpg"
+                       
+                 ></p>
+<p>重点就是<code>$this-&gt;app-&gt;user</code>怎么获取到</p>
+<p><code>commonModel#__construct-&gt;commonModel#setUser</code></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673579541958316736037008640.jpg"
+                       
+                 ></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673579634580816736037008657.jpg"
+                       
+                 ></p>
+<p>可以看到<code>$this-&gt;app-&gt;user</code>获取有两种方式</p>
+<ol>
+<li>从<code>session</code>中获取</li>
+<li>如果开启了匿名访问或是从终端访问则会设置<code>session</code></li>
+</ol>
+<p>匿名访问默认是关闭状态的所以利用有限<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673590045981816736037008671.jpg"
+                       
+                 ></p>
+<p>现在来看下<code>$this-&gt;session-&gt;user</code>怎么获取<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673590111959016736037008682.jpg"
+                       
+                 ></p>
+<p>搜索一下发现在<code>module/misc/control.php</code><br>中函数<code>captcha</code>中session名可控<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673590154760816736037008704.jpg"
+                       
+                 ></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673590595587216736037008716.jpg"
+                       
+                 ></p>
+<p>获取到session后访问下后台接口试下<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673590626992816736037008732.jpg"
+                       
+                 ></p>
+<p>验证成功</p>
+<h2 id="GetShell-or-RCE"><a href="#GetShell-or-RCE" class="headerlink" title="GetShell or RCE"></a>GetShell or RCE</h2><p>现在再来看下另一个patch的module<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673590726448116736037008752.jpg"
+                       
+                 ><br>发现是对sql语句做了预处理，那么这里的应该就是存在sql注入，因为zentao的数据库使用的pdo所以可以多语句执行。<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673591158392516736037008771.jpg"
+                       
+                 ></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673591594366416736037008783.jpg"
+                       
+                 ></p>
+<p>sql注入怎么到rce呢,在这里猜测下</p>
+<ol>
+<li>多语句执行可以在知道web的绝对路径下写入shell</li>
+<li>结合其他功能进行操作</li>
+</ol>
+<h3 id="SQL-To-Shell"><a href="#SQL-To-Shell" class="headerlink" title="SQL To Shell"></a>SQL To Shell</h3><p>导出shell前提条件是，绝对路径在sql报错时已经爆出来了，还有一个条件是<code>secure_file_priv</code>没有设置值<br>docker起一个官方镜像<br><code>docker pull easysoft/zentao:18.0.beta1</code><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673592712472516736037008797.jpg"
+                       
+                 ></p>
+<p>满足利用条件。<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673593551869216736037008807.jpg"
+                       
+                 ><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673593522154016736037008825.jpg"
+                       
+                 ></p>
+<h3 id="Cron-to-RCE"><a href="#Cron-to-RCE" class="headerlink" title="Cron to RCE"></a>Cron to RCE</h3><p>如果<code>secure_file_priv</code>被设置为NULL或其他值，则无法导出shell，那么怎么解决呢，粗略看了下后台的其他功能发现有一处计划任务存在利用。<br><code>module/cron/control.php#ajaxExec</code></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673593962991816736037008842.jpg"
+                       
+                 ><br>大致流程:<br>遍历<code>zt_cron</code>表中的状态不为<code>nostop</code>的数据，如果数据中<code>type</code>为<code>system</code>则直接执行命令</p>
+<p>但是在创建计划任务时会对<code>type</code>进行检测如果为<code>system</code>则返回错误<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673594193539216736037008855.jpg"
+                       
+                 ></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673594253062116736037008867.jpg"
+                       
+                 ></p>
+<p>那么要执行命令需要将新增的计划任务<code>type</code>修改为<code>system</code>，结合上面的SQL注入即可实现。</p>
+<p>创建计划任务<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673594502955316736037008878.jpg"
+                       
+                 ><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673594865014616736037008896.jpg"
+                       
+                 ></p>
+<p>修改type<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673594901772916736037008915.jpg"
+                       
+                 ><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673594924393516736037008932.jpg"
+                       
+                 ></p>
+<p>执行命令<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673594979651516736037008949.jpg"
+                       
+                 ><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673595169260316736037008959.jpg"
+                       
+                 ><br>等待触发<br>在日志中看到成功触发<br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673595208111316736037008970.jpg"
+                       
+                 ></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673595155009116736037008981.jpg"
+                       
+                 ></p>
+<h2 id="poc验证"><a href="#poc验证" class="headerlink" title="poc验证"></a>poc验证</h2><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673603486815116736037008988.jpg"
+                       
+                 ><br><img  
+                       lazyload
+                       alt="image"
+                       data-src="http://syncoss.oss-cn-beijing.aliyuncs.com/2023/01/13/1673603545165916736037008993.jpg"
+                       
+                 ></p>
+
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                Zentao RCE
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2023/01/13/Zentao-RCE/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    Author
+                </div>
+                <div class="content">Q1ngShan</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    Published
+                </div>
+                <div class="content">2023-01-13 18:02</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    License
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed">
+                        <i class="fa-brands fa-creative-commons"></i>
+                        <i class="fa-brands fa-creative-commons-by"></i>
+                        <i class="fa-brands fa-creative-commons-nc"></i>
+                        <i class="fa-brands fa-creative-commons-sa"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="Copy copyright info" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="Share to WeChat"
+            data-tooltip-img-tip="Scan by WeChat"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to WeiBo"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2024/03/05/H3Bpm/"
+                                   title="H3Bpm"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">H3Bpm</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2022/11/03/ASPX-Upload-Tips/"
+                                   title="ASPX Upload Tips"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">ASPX Upload Tips</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;Comments
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">Comment plugin failed to load</span>
+    <button class="reload keep-button">Click to reload</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">Loading comment plugin</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="valine-container">
+        <div id="vcomments"></div>
+        <script data-pjax
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script data-pjax
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initValine = () => {
+            const config = {
+              el: '#vcomments',
+              appId: 'uYjIFMUudNVXopwyoQdj70qU',
+              appKey: '9FcDBafKpBdj0IEnf4IQqEQ5',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '',
+              lang: 'en'.toLowerCase()
+            }
+
+            if ('https://uyjifmuu.api.lncldglobal.com') {
+              config.serverURLs = 'https://uyjifmuu.api.lncldglobal.com'
+            }
+
+            if (window?.Valine) {
+              new Valine(config)
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initValine()
+              }, 1000)
+            }
+          }
+
+          if ('true' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initValine()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initValine)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87"><span class="nav-text">权限绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GetShell-or-RCE"><span class="nav-text">GetShell or RCE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-To-Shell"><span class="nav-text">SQL To Shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cron-to-RCE"><span class="nav-text">Cron to RCE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poc%E9%AA%8C%E8%AF%81"><span class="nav-text">poc验证</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Q1ngShan</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+                
+                <div class="deploy-info info-item default">
+                    
+                        This site is deployed on <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/deploy-provider/github.png"></span>
+                    
+                </div>
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87"><span class="nav-text">权限绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GetShell-or-RCE"><span class="nav-text">GetShell or RCE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-To-Shell"><span class="nav-text">SQL To Shell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cron-to-RCE"><span class="nav-text">Cron to RCE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poc%E9%AA%8C%E8%AF%81"><span class="nav-text">poc验证</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/toggle-theme.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/code-block.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/libs/anime.min.js"></script>
+
+<!-- local-search -->
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/local-search.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/lazyload.js"></script>
+
+
+<div class="pjax">
+    
+        <!-- post-helper -->
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/post-helper.js"></script>
+
+        <!-- toc -->
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/toc.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/copyright-info.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/post/share.js"></script>
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@4.0.7/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>
